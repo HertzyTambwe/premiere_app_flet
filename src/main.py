@@ -1,26 +1,18 @@
+import time
 import flet as ft
 
 
 def main(page: ft.Page):
-    counter = ft.Text("0", size=50, data=0)
+    
+    def add_clicked(e):
+        page.add(ft.Checkbox(label=new_task.value))
+        new_task.value = ''
+        new_task.focus()
+        new_task.update()
 
-    def increment_click(e):
-        counter.data += 1
-        counter.value = str(counter.data)
-        counter.update()
+    new_task = ft.TextField(hint_text='New task', width=300)
+    page.add(ft.Row([new_task, ft.Button('Add', on_click=add_clicked)]))
 
-    page.floating_action_button = ft.FloatingActionButton(
-        icon=ft.Icons.ADD, on_click=increment_click
-    )
-    page.add(
-        ft.SafeArea(
-            ft.Container(
-                counter,
-                alignment=ft.alignment.center,
-            ),
-            expand=True,
-        )
-    )
 
 
 ft.app(main)
