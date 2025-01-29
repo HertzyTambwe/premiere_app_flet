@@ -4,15 +4,13 @@ import flet as ft
 
 def main(page: ft.Page):
     
-    def add_clicked(e):
-        page.add(ft.Checkbox(label=new_task.value))
-        new_task.value = ''
-        new_task.focus()
-        new_task.update()
+    def checkbox_changed(e):
+        output_text.value =(
+            f"Tu as apris a comment skyer {todo_check.value}"
+        )
+        page.update()
 
-    new_task = ft.TextField(hint_text='New task', width=300)
-    page.add(ft.Row([new_task, ft.Button('Add', on_click=add_clicked)]))
-
-
-
+    output_text = ft.Text()
+    todo_check = ft.Checkbox(label="Todo: Apprendre a faire du sky", value=False, on_change=checkbox_changed)
+    page.add(todo_check, output_text)
 ft.app(main)
